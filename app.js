@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', cityWeather)
 
+const form = document.querySelector('#weather-form')
+form.addEventListener('submit', cityWeather)
+
 function weatherDataFetch(city){
 
 
@@ -26,6 +29,13 @@ function drawWeather(data){
     document.querySelector('#temp').innerHTML = `${temp}&deg;`
 }
 
-function cityWeather(){
-    weatherDataFetch('Tallinn')
+function cityWeather(event){
+    if(document.querySelector('#city').value !== ''){
+        city = document.querySelector('#city').value
+        document.querySelector('#city').value = ''
+    } else {
+        city = 'Tallinn'
+    }
+    weatherDataFetch(city)
+    event.preventDefault()
 }
